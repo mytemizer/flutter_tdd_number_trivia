@@ -1,15 +1,16 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_number_trivia_tdd/core/error/failures.dart';
+import 'package:flutter_number_trivia_tdd/core/usecases/usecase.dart';
 import 'package:flutter_number_trivia_tdd/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:flutter_number_trivia_tdd/features/number_trivia/domain/repositories/number_trivia_repository.dart';
 
-class GetConcreteNumberTrivia {
+class GetRandomNumberTrivia implements UseCase<NumberTrivia, NoParams> {
   final NumberTriviaRepository repository;
 
-  GetConcreteNumberTrivia(this.repository);
+  GetRandomNumberTrivia(this.repository);
 
-  Future<Either<Failure, NumberTrivia>> execute({@required int number}) async {
-    return await repository.getConcreteNumberTrivia(number);
+  @override
+  Future<Either<Failure, NumberTrivia>> call(NoParams params) async {
+    return repository.getRandomNumberTrivia();
   }
 }
